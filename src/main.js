@@ -1,7 +1,7 @@
 import User from "./data/user";
 import createRouter from "./routes";
 
-const [router] = createRouter();
+const [router, hasRouter] = createRouter();
 
 function clickEvent(e) {
   const { id, tagName, href } = e.target;
@@ -79,9 +79,8 @@ function login(formData) {
 document.body.addEventListener("click", clickEvent);
 document.body.addEventListener("submit", submitEvent);
 
-window.addEventListener("load", () =>
-  router(window.location.pathname || "/login"),
-);
+window.addEventListener("load", () => router());
+window.addEventListener("hashchange", () => hasRouter());
 window.addEventListener("popstate", (e) => {
   router(e.target.location.pathname);
 });

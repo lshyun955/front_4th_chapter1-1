@@ -13,7 +13,7 @@ export default function Nav({ pageName }) {
   <nav class="bg-white shadow-md p-2 sticky top-14">
     <ul class="flex justify-around">
       <li><a id="home" href="/" class="${getTextColor("home")}">홈</a></li>
-      <li><a id="profile" href="/profile" class="${getTextColor("profile")}">프로필</a></li>
+      ${user?.username ? `<li><a id="profile" href="/profile" class="${getTextColor("profile")}">프로필</a></li>` : ""}
       <li><a id="${user?.username ? "logout" : "login"}" href="${user?.username ? "/logout" : "/login"}" class="text-gray-600">${user?.username ? "로그아웃" : "로그인"}</a></li>
     </ul>
   </nav>
