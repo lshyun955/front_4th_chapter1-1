@@ -1,9 +1,11 @@
 /**
  * 로그인 체크 함수
  */
+import localStorageService from "@/utils/storage";
+
 export default (function User() {
   function get() {
-    const user = localStorage.getItem("user");
+    const user = localStorageService.get("user");
 
     const result = {
       userInfo: null,
@@ -11,7 +13,7 @@ export default (function User() {
     };
 
     if (user) {
-      result.userInfo = JSON.parse(user);
+      result.userInfo = user;
       result.isLogin = true;
     }
 
@@ -25,17 +27,16 @@ export default (function User() {
       bio: bio || "",
     };
 
-    localStorage.setItem("user", JSON.stringify(userInfo));
+    localStorageService.set("user", userInfo);
 
     return userInfo;
   }
 
   function remove({ username }) {
-    const hasUser =
-      JSON.parse(localStorage.getItem("user") || {})?.username === username;
+    const hasUser = localStorageService.get("user")?.username === username;
 
     if (hasUser) {
-      localStorage.removeItem("user");
+      localStorageService.remove("user");
     } else {
       return "none user";
     }
